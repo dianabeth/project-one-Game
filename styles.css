@@ -4,7 +4,7 @@ body {
 }
 
 body {
-  background-color: whitesmoke;
+  background-color: rgb(3, 24, 3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@ body {
 }
 
 canvas {
-  background-color: black;
+  background-color: rgb(122, 108, 108);
   color: whitesmoke;
   margin: 0;
   padding: 0;

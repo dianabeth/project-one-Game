@@ -6,28 +6,37 @@ class Game {
     this.height = 50;
     this.player = new Player(this);
     this.infections = [];
-    this.prize = new Prize(this);
+    this.protection = [];
+    this.vaccines = [];
     this.scoreboard = new Scoreboard(this);
-    //this.prize.setRandomPosition();
     this.setKeyBindings();
     this.createInfections();
+    this.createProtection();
+    //this.checkCollusion();
+    this.createVaccineDrops();
     //this.setBoundaries();
   }
   createInfections() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 16; i++) {
       let infection = new Infection(this);
       this.infections.push(infection);
     }
   }
 
-  /*createPrizes () {
-   
-      for (let i = 0; i < 10; i++) {
-      let  infection = new Infection(this);
-        this.infections.push(infection);
-      }
-  
-  
+  createProtection() {
+    for (let i = 0; i < 5; i++) {
+      let protectiveGear = new Protection(this);
+      this.protection.push(protectiveGear);
+    }
+  }
+
+  createVaccineDrops() {
+    for (let i = 0; i < 15; i++) {
+      let vaccine = new VaccineDrops(this);
+      this.vaccines.push(vaccine);
+    }
+  }
+  /*
   setBoundaries() {
     if (this.player.x >= this.width || this.player.x <= 0) {
       // this.speedX = this.speedX * -1;
@@ -42,6 +51,7 @@ class Game {
   setKeyBindings() {
     window.addEventListener('keydown', event => {
       const key = event.key;
+
       event.preventDefault();
       switch (key) {
         case 'ArrowUp':
@@ -56,24 +66,42 @@ class Game {
         case 'ArrowRight':
           this.player.x += 15;
           break;
+        case 'Space':
+          let vaccine = new VaccineDrops();
+          this.vaccines.push(vaccine);
+          break;
       }
     });
   }
-  checkIntersection(player) {
-    return (
-      player.x + player.width > this.x &&
-      player.x < this.x + this.width &&
-      player.y + player.height > this.y &&
-      player.y < this.y + this.height
-    );
+
+  checkCollusion(player) {
+    if (this.player.x > this.infection.x || this.infection.x > this.player.x) return false;
+    if (this.player.y > this.infection.y || this.infection.y > this.player.y) return false;
+    return true;
   }
+  /*
+  checkCollisionWithProtection() {
+    const protection = this.protection;
+    const x = protection.x;
+    const y = protection.y;
+    const collusion = this.checkCollusion([x, y]);
+    console.log(collusion);
+    //return collusion;
+  }*/
 
   runLogic() {
     this.player.runLogic();
+
     for (let infection of this.infections) {
       infection.runLogic();
     }
-    this.prize.runLogic();
+    for (let protectiveGear of this.protection) {
+      protectiveGear.runLogic();
+    }
+
+    for (let vaccine of this.vaccines) {
+        vaccine.runLogic();
+    }
   }
 
   clean() {
@@ -81,11 +109,25 @@ class Game {
   }
 
   paint() {
+    for (let i = 0; i < this.vaccines.length; i++) {
+      this.vaccines[i].paint();
+    }
+    //paint player
     this.player.paint();
+    //paint infections
     for (let infection of this.infections) {
       infection.paint();
     }
-    this.prize.paint();
+    //paint protectiveGear
+    for (let protectiveGear of this.protection) {
+      protectiveGear.paint();
+    }
+    //paint vaccine
+    //this.vaccine = new VaccineDrops(this);
+    //for (let i = 0; i < this.vaccine.length; i++) {
+    //  vaccineArray[i].paint();
+    //}
+    //paint scoreboard
     this.scoreboard.paint();
   }
 
