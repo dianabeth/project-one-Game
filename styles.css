@@ -4,14 +4,28 @@ body {
 }
 
 body {
-  background-color: rgb(3, 24, 3);
+  background-color: whitesmoke;
+  /*url('https://www.ecdc.europa.eu/sites/default/files/styles/is_large/public/images/Coronavirus_H.png?itok=_QCjKfqJ');*/
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Impact, Charcoal, sans-serif;
-  color: whitesmoke;
+  font-size: 13px;
 }
 
+h1 {
+  color: aquamarine;
+}
+h5 {
+  color: green;
+}
+h1,
+h5 {
+  text-align: center;
+}
+li {
+  color: burlywood;
+}
 canvas {
   background-image: url('https://png.pngtree.com/png-vector/20200412/ourlarge/pngtree-desinfectant-and-covid-19-corona-virus-png-image_2182885.jpg');
   margin: 0;

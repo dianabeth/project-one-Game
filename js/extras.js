@@ -1,17 +1,9 @@
-/*class Route {
-  constructor (x, y, directionX, directionY) {
-    this.point = new Point(x, y);
-    this.direction = directionX;
-    this.direction = directionY;
-  } 
-}*/
-
 class VaccineDrops {
   constructor(game) {
     this.game = game;
     this.width = 5;
     this.height = 10;
-    this.speed = 3;
+    this.speed = 1;
     this.x = this.game.player.x + 10;
     this.y = this.game.player.y;
   }
@@ -45,3 +37,5 @@ class Scoreboard {
     context.restore();
   }
 }
+
+//https://i2.wp.com/i.pinimg.com/474x/7a/95/a0/7a95a09cecc36ba20ef6594ddaf5b685.jpg

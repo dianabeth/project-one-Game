@@ -1,19 +1,18 @@
 const playerImage = new Image();
-playerImage.src =
-  'https://png.pngtree.com/png-clipart/20200304/ourlarge/pngtree-hand-drawn-2019-new-corona-virus-wearing-mask-protection-png-image_2156538.jpg';
+playerImage.src = '/images/hiclipart.com (2).png';
 
 class Player {
   constructor(game) {
     this.game = game;
     this.x = 250;
     this.y = 480;
-    this.speedX = 10;
-    this.speedY = 10;
+    this.speedX = 20;
+    this.speedY = 20;
 
     this.width = 50;
-    this.height = 70;
+    this.height = 50;
 
-    this.health = 500;
+    this.health = 300;
   }
 
   position() {
@@ -32,6 +31,9 @@ class Player {
   runLogic() {
     if (this.y + this.speedY < 0) {
       this.speedY = 0;
+    }
+    if (this.health <= 0) {
+      this.game.lose();
     }
   }
   paint() {

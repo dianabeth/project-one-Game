@@ -4,9 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="card" style="width: 18rem;">
+      <h1>WELCOME</h1>
+      <div class="card-body">
+        <h5 class="card-title">STOP THE VIRUS!</h5>
+        <p class="card-text">
+          Use the left, right, down and up arrows on your keyboard to find your way around!!!
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Stop the virus by injecting them with vaccines.</li>
+        <li class="list-group-item">
+          Injecting your shields with vaccines will result in a decrease in health.
+        </li>
+        <li class="list-group-item">Colliding with shields will give a boost to your health.</li>
+        <li class="list-group-item">Running into the virus will result in a grave illness!!!</li>
+      </ul>
+      <div class="card-body">
+        <button class="card-link">START GAME</button>
+        <button class="card-link">REPLAY</button>
+      </div>
+    </div>
+
     <canvas width="600" height="600" id="game"> </canvas>
 
     <script src="js/extras.js"></script>
