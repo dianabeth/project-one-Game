@@ -12,7 +12,7 @@ class Player {
     this.width = 50;
     this.height = 50;
 
-    this.health = 300;
+    this.health = 500;
   }
 
   position() {
