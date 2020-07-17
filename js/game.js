@@ -335,7 +335,8 @@ class Game {
     this.context.fillRect(0, 0, this.width, this.height);
     this.context.fillStyle = 'greenyellow';
     this.context.font = '30px Arial';
-    this.context.fillText('OOPS...YOU HAVE BEEN INFECTED!!!', 150, 300);
+    this.context.fillText('GAME OVER!!!', 80, 260);
+    this.context.fillText('...YOU HAVE BEEN INFECTED!!!', 100, 300);
   }
 
   loop(timestamp) {
