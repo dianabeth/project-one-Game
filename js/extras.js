@@ -1,8 +1,11 @@
+vaccineImage = new Image();
+vaccineImage.src = '/images/hiclipart.com (5).png';
+
 class VaccineDrops {
   constructor(game) {
     this.game = game;
-    this.width = 5;
-    this.height = 10;
+    this.width = 30;
+    this.height = 30;
     this.speed = 1;
     this.x = this.game.player.x + 10;
     this.y = this.game.player.y;
@@ -16,7 +19,7 @@ class VaccineDrops {
     const context = this.game.context;
     context.save();
     context.fillStyle = 'black';
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.drawImage(vaccineImage, this.x, this.y, this.width, this.height);
     context.restore();
   }
 }
