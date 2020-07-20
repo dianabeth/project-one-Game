@@ -102,12 +102,12 @@ class Protection2 {
 }
 
 protectionImage3 = new Image();
-protectionImage3.src = '/images/hiclipart.com (3).png';
+protectionImage3.src = '/images/hiclipart.com (16).png';
 class Protection3 {
   constructor(game) {
     this.game = game;
-    this.width = 40;
-    this.height = 30;
+    this.width = 80;
+    this.height = 70;
     //this.speed = 1;
     this.setRandomPosition();
   }

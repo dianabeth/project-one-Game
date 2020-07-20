@@ -437,7 +437,7 @@ class Game {
   paintWin() {
     this.context.fillStyle = 'wheat';
     this.context.fillRect(0, 0, this.width, this.height);
-    this.context.fillStyle = 'magenta';
+    this.context.fillStyle = '#CC686B';
     this.context.font = '30px Impact';
     this.context.fillText('CONGRATULATIONS...!!!', 80, 260);
     this.context.fillText('...YOU ARE NOW IMMUNE!!!', 100, 300);
