@@ -14,6 +14,7 @@ class Game {
     this.infections = [];
     this.protection = [];
     this.protection2 = [];
+    this.protection3 = [];
     this.vaccines = [];
     this.scoreboard = new Scoreboard(this);
     this.running = true;
@@ -21,7 +22,10 @@ class Game {
     this.createInfections();
     this.createProtection();
     this.createProtection2();
+    this.createProtection3();
   }
+
+  //Create infections and protection
   createInfections() {
     for (let i = 0; i < 20; i++) {
       const infection = new Infection(this);
@@ -43,6 +47,14 @@ class Game {
     }
   }
 
+  createProtection3() {
+    for (let i = 0; i < 3; i++) {
+      let protectiveGear3 = new Protection3(this);
+      this.protection3.push(protectiveGear3);
+    }
+  }
+
+  //Boundaries
   setPlayerBoundaries() {
     if (this.player.x + this.player.width >= this.width) {
       this.player.x = this.canvas.width - this.player.width;
@@ -109,6 +121,7 @@ class Game {
     });
   }
 
+  //Collision with infection
   detectProtectionCollisionWithInfection() {
     for (let protection of this.protection) {
       for (let infection of this.infections) {
@@ -139,13 +152,30 @@ class Game {
         ) {
           this.player.health -= 10;
           this.protection2.splice(this.protection2.indexOf(protection), 1);
-
           //console.log(this.protection.length);
         }
       }
     }
   }
 
+  detectProtection3CollisionWithInfection() {
+    for (let protection of this.protection3) {
+      for (let infection of this.infections) {
+        if (
+          protection.x + protection.width > infection.x &&
+          protection.x < infection.x + infection.width &&
+          protection.y + protection.height > infection.y &&
+          protection.y < infection.y + infection.height
+        ) {
+          this.player.health -= 5;
+          this.protection3.splice(this.protection3.indexOf(protection), 1);
+          // console.log('protection : ', this.protection.length);
+        }
+      }
+    }
+  }
+
+  //collision with disinfectantSpray
   detectVaccineCollisionWithInfection() {
     for (let vaccine of this.vaccines) {
       for (let infection of this.infections) {
@@ -158,8 +188,6 @@ class Game {
           this.player.health += 20;
           this.vaccines.splice(this.vaccines.indexOf(vaccine), 1);
           this.infections.splice(this.infections.indexOf(infection), 1);
-
-          //console.log(this.protection.length);
         }
       }
     }
@@ -174,10 +202,9 @@ class Game {
           vaccine.y + vaccine.height > protection.y &&
           vaccine.y < protection.y + protection.height
         ) {
-          this.player.health -= 50;
+          this.player.health -= 20;
           this.vaccines.splice(this.vaccines.indexOf(vaccine), 1);
           this.protection.splice(this.protection.indexOf(protection), 1);
-
           //console.log(this.protection.length);
         }
       }
@@ -197,6 +224,44 @@ class Game {
           this.vaccines.splice(this.vaccines.indexOf(vaccine), 1);
           this.protection2.splice(this.protection2.indexOf(protection), 1);
         }
+      }
+    }
+  }
+
+  detectVaccineCollisionWithProtection3() {
+    for (let vaccine of this.vaccines) {
+      for (let protection of this.protection3) {
+        if (
+          vaccine.x + vaccine.width > protection.x &&
+          vaccine.x < protection.x + protection.width &&
+          vaccine.y + vaccine.height > protection.y &&
+          vaccine.y < protection.y + protection.height
+        ) {
+          this.player.health -= 20;
+          this.vaccines.splice(this.vaccines.indexOf(vaccine), 1);
+          this.protection3.splice(this.protection3.indexOf(protection), 1);
+          //console.log(this.protection.length);
+        }
+      }
+    }
+  }
+
+  //Collision with player
+
+  detectInfectionCollision() {
+    for (let infection of this.infections) {
+      if (
+        this.player.x + this.player.width > infection.x &&
+        this.player.x < infection.x + infection.width &&
+        this.player.y + this.player.height > infection.y &&
+        this.player.y < infection.y + infection.height
+      ) {
+        this.player.health -= 20;
+        this.infections.splice(this.infections.indexOf(infection), 1);
+
+        console.log(this.infections.length);
+      } else if (infection.height + infection.y > this.height) {
+        this.infections.splice(this.infections.indexOf(infection), 1);
       }
     }
   }
@@ -233,20 +298,18 @@ class Game {
     }
   }
 
-  detectInfectionCollision() {
-    for (let infection of this.infections) {
+  detectProtection3Collision() {
+    for (let protection of this.protection3) {
       if (
-        this.player.x + this.player.width > infection.x &&
-        this.player.x < infection.x + infection.width &&
-        this.player.y + this.player.height > infection.y &&
-        this.player.y < infection.y + infection.height
+        this.player.x + this.player.width > protection.x &&
+        this.player.x < protection.x + protection.width &&
+        this.player.y + this.player.height > protection.y &&
+        this.player.y < protection.y + protection.height
       ) {
-        this.player.health -= 20;
-        this.infections.splice(this.infections.indexOf(infection), 1);
-
-        console.log(this.infections.length);
-      } else if (infection.height + infection.y > this.height) {
-        this.infections.splice(this.infections.indexOf(infection), 1);
+        this.player.health += 20;
+        this.protection3.splice(this.protection3.indexOf(protection), 1);
+      } else if (protection.height + protection.y > this.height) {
+        this.protection3.splice(this.protection3.indexOf(protection), 1);
       }
     }
   }
@@ -264,6 +327,11 @@ class Game {
     for (let protectiveGear of this.protection2) {
       protectiveGear.runLogic();
     }
+
+    for (let protectiveGear of this.protection3) {
+      protectiveGear.runLogic();
+    }
+
     if (this.infections.length === 18) {
       console.log(this.infections.length);
       this.createInfections();
@@ -273,6 +341,10 @@ class Game {
     }
     if (this.protection2.length === 0) {
       this.createProtection2();
+    }
+
+    if (this.protection3.length === 0) {
+      this.createProtection3();
     }
     for (let vaccine of this.vaccines) {
       vaccine.runLogic();
@@ -295,11 +367,14 @@ class Game {
     this.detectInfectionCollision();
     this.detectProtectionCollision();
     this.detectProtection2Collision();
+    this.detectProtection3Collision();
     this.detectVaccineCollisionWithInfection();
     this.detectVaccineCollisionWithProtection();
     this.detectVaccineCollisionWithProtection2();
+    this.detectVaccineCollisionWithProtection3();
     this.detectProtectionCollisionWithInfection();
     this.detectProtection2CollisionWithInfection();
+    this.detectProtection3CollisionWithInfection();
   }
 
   clean() {
@@ -322,6 +397,10 @@ class Game {
       protectiveGear.paint();
     }
     for (let protectiveGear of this.protection2) {
+      protectiveGear.paint();
+    }
+
+    for (let protectiveGear of this.protection3) {
       protectiveGear.paint();
     }
 

@@ -78,9 +78,6 @@ class Protection {
 
 protectionImage2 = new Image();
 protectionImage2.src = '/images/hiclipart.com (7).png';
-
-protectionImage3 = new Image();
-protectionImage3.src = '/images/hiclipart.com (3).png';
 class Protection2 {
   constructor(game) {
     this.game = game;
@@ -100,7 +97,31 @@ class Protection2 {
     const context = this.game.context;
     context.save();
     context.drawImage(protectionImage2, this.x, this.y, this.width, this.height);
-    context.drawImage(protectionImage3, this.x + 50, this.y + 40, this.width, this.height);
+    context.restore();
+  }
+}
+
+protectionImage3 = new Image();
+protectionImage3.src = '/images/hiclipart.com (3).png';
+class Protection3 {
+  constructor(game) {
+    this.game = game;
+    this.width = 40;
+    this.height = 30;
+    //this.speed = 1;
+    this.setRandomPosition();
+  }
+  setRandomPosition() {
+    this.x = Math.floor(Math.random() * 10 * 50);
+    this.y = Math.floor(Math.random() * 10 * 50);
+  }
+  runLogic() {
+    //this.y += this.speed;
+  }
+  paint() {
+    const context = this.game.context;
+    context.save();
+    context.drawImage(protectionImage3, this.x, this.y, this.width, this.height);
     context.restore();
   }
 }
