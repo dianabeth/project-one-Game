@@ -56,8 +56,8 @@ protectionImage.src = '/images/hiclipart.com (15).png';
 class Protection {
   constructor(game) {
     this.game = game;
-    this.width = 50;
-    this.height = 50;
+    this.width = 35;
+    this.height = 60;
     //this.speed = 1;
     this.setRandomPosition();
   }

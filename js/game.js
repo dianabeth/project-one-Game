@@ -1,3 +1,7 @@
+const coughingSoundUrl = '/audio/408086__biawinter__cough.wav';
+
+const coughingSound = new Audio('coughingSoundUrl');
+
 class Game {
   constructor(canvas) {
     this.canvas = canvas;
@@ -13,7 +17,6 @@ class Game {
     this.vaccines = [];
     this.scoreboard = new Scoreboard(this);
     this.running = true;
-
     this.setKeyBindings();
     this.createInfections();
     this.createProtection();
@@ -118,8 +121,8 @@ class Game {
           this.player.health -= 5;
           this.protection.splice(this.protection.indexOf(protection), 1);
 
-          console.log('protection : ', this.protection.length);
-          console.log('infection : ', this.infections.length);
+          // console.log('protection : ', this.protection.length);
+          // console.log('infection : ', this.infections.length);
         }
       }
     }
@@ -283,9 +286,9 @@ class Game {
       this.win();
     }
 
-    // if ((this.running === true && this.player.health !== 0) || this.player.health !== 1200) {
-    //  this.pause();
-    //}
+    if (this.running === true && this.player.health !== 0 && this.player.health !== 1200) {
+      this.pause();
+    }
 
     this.setPlayerBoundaries();
     this.setInfectionBoundaries();
@@ -330,21 +333,21 @@ class Game {
     if (this.player.health <= 0) {
       this.paintLose();
     }
-    //if (this.running === true && this.player.health !== 0 && this.player.health !== 1200) {
-    //  this.paintPaused;
-    //}
+
+    if (this.running === true && this.player.health !== 0 && this.player.health !== 1200) {
+      this.paintPaused;
+    }
+  }
+  pause() {
+    this.running = true;
   }
 
-  //pause() {
-  //  this.running = true;
-  //}
+  paintPaused() {
+    this.context.fillStyle = 'magenta';
+    this.context.font = '30px Impact';
+    this.context.fillText('PAUSED!!!', 300, 300);
+  }
 
-  //paintPaused() {
-  //  this.context.fillStyle = 'magenta';
-  //  this.context.font = '30px Impact';
-  //  this.context.fillText('PAUSED!!!', 300, 300);
-  //}
-  replay() {}
   win() {
     if (this.running === true && this.player.health >= 1200);
     {
@@ -360,8 +363,10 @@ class Game {
     this.context.fillText('CONGRATULATIONS...!!!', 80, 260);
     this.context.fillText('...YOU ARE NOW IMMUNE!!!', 100, 300);
   }
+
   lose() {
     this.running = false;
+    coughingSound.play();
   }
 
   paintLose() {
@@ -376,8 +381,6 @@ class Game {
   loop(timestamp) {
     this.runLogic(timestamp);
     this.clean();
-
-    //this.lose();
 
     if (this.running) {
       window.requestAnimationFrame(timestamp => this.loop(timestamp));
