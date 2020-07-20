@@ -27,7 +27,7 @@ h5 {
   text-align: center;
 }
 p {
-  color: #CC686B;
+  color: #cc686b;
 }
 li {
   color: wheat;
@@ -44,4 +44,7 @@ canvas {
 button {
   color: #5da693;
   background-color: black;
+}
+footer {
+  color: antiquewhite;
 }
