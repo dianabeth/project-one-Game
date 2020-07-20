@@ -1,5 +1,5 @@
 vaccineImage = new Image();
-vaccineImage.src = '/images/hiclipart.com (5).png';
+vaccineImage.src = '/images/hiclipart.com (6).png';
 
 class VaccineDrops {
   constructor(game) {

@@ -13,11 +13,11 @@ class Game {
     this.vaccines = [];
     this.scoreboard = new Scoreboard(this);
     this.running = true;
+
     this.setKeyBindings();
     this.createInfections();
     this.createProtection();
     this.createProtection2();
-    //this.move();
   }
   createInfections() {
     for (let i = 0; i < 20; i++) {
@@ -69,9 +69,6 @@ class Game {
       this.infections.y = 0;
     }
   }
-  //move(direction) {
-  //  this.x += direction * 10;
-  //  this.y += direction * 10;
 
   setKeyBindings() {
     window.addEventListener('keydown', event => {
@@ -83,25 +80,21 @@ class Game {
           if (this.running) {
             this.player.y -= 20;
           }
-          //this.y.move(-1);
           break;
         case 40:
           if (this.running) {
             this.player.y += 20;
           }
-          //this.y.move(1);
           break;
         case 37:
           if (this.running) {
             this.player.x -= 20;
           }
-          // this.x.move(-1);
           break;
         case 39:
           if (this.running) {
             this.player.x += 20;
           }
-          // this.x.move(1);
           break;
         case 32:
           if (this.running) {
@@ -112,6 +105,7 @@ class Game {
       }
     });
   }
+
   detectProtectionCollisionWithInfection() {
     for (let protection of this.protection) {
       for (let infection of this.infections) {
@@ -121,14 +115,16 @@ class Game {
           protection.y + protection.height > infection.y &&
           protection.y < infection.y + infection.height
         ) {
-          this.player.health -= 10;
+          this.player.health -= 5;
           this.protection.splice(this.protection.indexOf(protection), 1);
 
-          //console.log(this.protection.length);
+          console.log('protection : ', this.protection.length);
+          console.log('infection : ', this.infections.length);
         }
       }
     }
   }
+
   detectProtection2CollisionWithInfection() {
     for (let protection of this.protection2) {
       for (let infection of this.infections) {
@@ -282,6 +278,14 @@ class Game {
       //console.log(this.player.health);
       this.lose();
     }
+    if (this.player.health >= 1200) {
+      //console.log(this.player.health);
+      this.win();
+    }
+
+    // if ((this.running === true && this.player.health !== 0) || this.player.health !== 1200) {
+    //  this.pause();
+    //}
 
     this.setPlayerBoundaries();
     this.setInfectionBoundaries();
@@ -320,12 +324,42 @@ class Game {
 
     //paint scoreboard
     this.scoreboard.paint();
-
+    if (this.player.health >= 1200) {
+      this.paintWin();
+    }
     if (this.player.health <= 0) {
       this.paintLose();
     }
+    //if (this.running === true && this.player.health !== 0 && this.player.health !== 1200) {
+    //  this.paintPaused;
+    //}
   }
 
+  //pause() {
+  //  this.running = true;
+  //}
+
+  //paintPaused() {
+  //  this.context.fillStyle = 'magenta';
+  //  this.context.font = '30px Impact';
+  //  this.context.fillText('PAUSED!!!', 300, 300);
+  //}
+  replay() {}
+  win() {
+    if (this.running === true && this.player.health >= 1200);
+    {
+      this.running = false;
+    }
+  }
+
+  paintWin() {
+    this.context.fillStyle = 'wheat';
+    this.context.fillRect(0, 0, this.width, this.height);
+    this.context.fillStyle = 'magenta';
+    this.context.font = '30px Impact';
+    this.context.fillText('CONGRATULATIONS...!!!', 80, 260);
+    this.context.fillText('...YOU ARE NOW IMMUNE!!!', 100, 300);
+  }
   lose() {
     this.running = false;
   }

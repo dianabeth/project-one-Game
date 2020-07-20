@@ -51,13 +51,13 @@ class Infection {
 }
 
 protectionImage = new Image();
-protectionImage.src = '/images/hiclipart.com (3).png';
+protectionImage.src = '/images/hiclipart.com (15).png';
 
 class Protection {
   constructor(game) {
     this.game = game;
-    this.width = 30;
-    this.height = 30;
+    this.width = 50;
+    this.height = 50;
     //this.speed = 1;
     this.setRandomPosition();
   }
@@ -77,11 +77,14 @@ class Protection {
 }
 
 protectionImage2 = new Image();
-protectionImage2.src = '/images/hiclipart.com (4).png';
+protectionImage2.src = '/images/hiclipart.com (7).png';
+
+protectionImage3 = new Image();
+protectionImage3.src = '/images/hiclipart.com (3).png';
 class Protection2 {
   constructor(game) {
     this.game = game;
-    this.width = 50;
+    this.width = 45;
     this.height = 50;
     //this.speed = 1;
     this.setRandomPosition();
@@ -97,6 +100,7 @@ class Protection2 {
     const context = this.game.context;
     context.save();
     context.drawImage(protectionImage2, this.x, this.y, this.width, this.height);
+    context.drawImage(protectionImage3, this.x + 50, this.y + 40, this.width, this.height);
     context.restore();
   }
 }

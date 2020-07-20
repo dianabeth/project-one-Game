@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game</title>
+    <title>SPRAY THOSE BUGS</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -16,25 +16,37 @@
     <div class="card" style="width: 18rem;">
       <h1>WELCOME</h1>
       <div class="card-body">
-        <h5 class="card-title">SQUASH ALL BUGS!!!</h5>
+        <h5 class="card-title">HELP, STOP THE SPREAD!!!</h5>
         <p class="card-text">
-          Use the left, right, down and up arrows on your keyboard to find your way around!!!
+          Use &#x2190 &#x2193 &#x2191 &#x2192 on your keyboard to find your way around!!!
         </p>
+
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Stop the virus by injecting them with vaccines.</li>
         <li class="list-group-item">
-          Injecting your shields with vaccines will result in a decrease in health.
+          Stop the virus from spreading by keeping areas around you squeaky clean.
         </li>
-        <li class="list-group-item">Colliding with shields will give a boost to your health.</li>
-        <li class="list-group-item">Running into the virus will result in a grave illness!!!</li>
+        <li class="list-group-item">The use of protective gear gives a boost to your health.</li>
+        <li class="list-group-item">
+          Spraying on protective gear with disinfectants will result in a decrease in health.
+        </li>
+
+        <li class="list-group-item">
+          Coming in contact with the virus can result in an infection!!!
+        </li>
+        <li class="list-group-item">
+          Hint: Repeatedly hitting on the spacebar will disinfect areas above you...watch out for
+          the protective gear though!!!
+        </li>
       </ul>
       <div class="card-body">
-        <button class="card-link">START GAME</button>
-        <button class="card-link">REPLAY</button>
+        <button class="card-link play" id="play">PLAY</button>
+        <button class="card-link pause" id="pause">PAUSE</button>
+        <button class="card-link" id="replay">REPLAY</button>
       </div>
     </div>
 
+    <!-- <canvas width="600" height="600" id="startScreen"> </canvas>  -->
     <canvas width="600" height="600" id="game"> </canvas>
 
     <script src="js/extras.js"></script>
